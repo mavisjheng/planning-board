@@ -1,16 +1,25 @@
 {
-  "name": "my-app",
+  "name": "planning-board",
+  "homepage": "https://dsgithub.trendmicro.com/pages/mavis-jheng/planning-board",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/css-reset": "^5.0.9",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "bootstrap": "^4.4.1",
+    "gh-pages": "^2.2.0",
     "react": "^16.12.0",
+    "react-beautiful-dnd": "^12.2.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "styled-components": "^4.4.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
