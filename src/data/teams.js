@@ -12,7 +12,16 @@ const teamData = {
   ],
   ALMA: ["Judy", "Lihan", "Prophet"],
   Bremen: ["Andy", "Chaotsung", "Freddie", "Mesh", "Roy", "Wisdom"],
-  Clover: ["Alvin", "Chuck", "Jack", "Tim", "Rebecca", "Shawn"],
+  Clover: [
+    "Alvin",
+    "Chuck",
+    "David",
+    "Jack",
+    "Mavis",
+    "Tim",
+    "Rebecca",
+    "Shawn"
+  ],
   Crystal: [
     "Link",
     "Darek",

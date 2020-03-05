@@ -1,17 +1,24 @@
-import React, { Component, Fragment } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip, Modal } from "react-bootstrap";
 import teams from "./data/teams";
 import "./custom.css";
 
-const Container = styled.div`
+const SelectionContainer = styled.div`
   margin: 8px;
   position: absolute;
   top: 0px;
   right: 0px;
 `;
 
-const TeamContainer = styled.div`
+const TrashContainer = styled.div`
+  margin: 8px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+`;
+
+const TeamListContainer = styled.div`
   margin-top: 4px;
   display: flex;
   flex-direction: column;
@@ -23,72 +30,95 @@ const TeamContainer = styled.div`
 
 const CircleButton = styled.button`
   border-radius: 50%;
-  width: 40px;
+  width: 42px;
   height: 40px;
   border: 2px solid;
   text-align: center;
-  color: DarkGoldenRod;
-  font: 26px Arial;
+  color: #bc9055;
+  font: 24px Arial;
   outline: none;
   :focus {
     outline: none;
   }
+  :active {
+    border: 2px solid #e0ccb1;
+    color: #e0ccb1;
+  }
+`;
+
+const TrashButton = styled(CircleButton)`
+  color: black;
   :active {
     border: 2px solid lightgrey;
     color: lightgrey;
   }
 `;
 
-export default class TeamList extends Component {
-  state = { teamNameDisplayed: false };
+export default function TeamList({ selectedTeam, onSelectTeam }) {
+  const [teamListDisplayed, setTeamListDisplayed] = useState(false);
+  const handleToggleTeamList = teamListDisplayed =>
+    setTeamListDisplayed(!teamListDisplayed);
 
-  render() {
-    return (
-      <Fragment>
-        <Container>
-          <OverlayTrigger
-            placement="left"
-            overlay={
-              <Tooltip>
-                {this.props.selectedTeam
-                  ? this.props.selectedTeam
-                  : "Select Team"}
-              </Tooltip>
-            }
-          >
-            <CircleButton
-              onClick={() =>
-                this.setState({
-                  teamNameDisplayed: !this.state.teamNameDisplayed
-                })
-              }
+  const [modalDisplayed, setModalDisplayed] = useState(false);
+  const handleCloseModal = () => setModalDisplayed(false);
+  const handleShowModal = () => setModalDisplayed(true);
+
+  const cleanBoard = () => {
+    handleCloseModal();
+    localStorage.clear("planningBoard");
+    window.location.reload();
+  };
+
+  return (
+    <>
+      <SelectionContainer>
+        <OverlayTrigger
+          placement="left"
+          overlay={
+            <Tooltip>{selectedTeam ? selectedTeam : "Select Team"}</Tooltip>
+          }
+        >
+          <CircleButton onClick={() => handleToggleTeamList(teamListDisplayed)}>
+            {teamListDisplayed ? "⩓" : selectedTeam ? selectedTeam[0] : "⩔"}
+          </CircleButton>
+        </OverlayTrigger>
+      </SelectionContainer>
+      {teamListDisplayed && (
+        <TeamListContainer>
+          {teams.name.map((team, index) => (
+            <Button
+              key={index}
+              variant={team === selectedTeam ? "info" : "outline-info"}
+              className="custom-team-button"
+              onClick={() => onSelectTeam(team)}
             >
-              {this.state.teamNameDisplayed
-                ? "x"
-                : this.props.selectedTeam
-                ? this.props.selectedTeam[0]
-                : "☟"}
-            </CircleButton>
-          </OverlayTrigger>
-        </Container>
-        {this.state.teamNameDisplayed && (
-          <TeamContainer>
-            {teams.name.map((team, index) => {
-              const currentSelected = team === this.props.selectedTeam;
-              return (
-                <Button
-                  key={index}
-                  variant={currentSelected ? "info" : "outline-info"}
-                  className="custom-team-button"
-                  onClick={() => this.props.onSelect(team)}
-                >
-                  {team}
-                </Button>
-              );
-            })}
-          </TeamContainer>
-        )}
-      </Fragment>
-    );
-  }
+              {team}
+            </Button>
+          ))}
+        </TeamListContainer>
+      )}
+      <TrashContainer>
+        <OverlayTrigger
+          placement="left"
+          overlay={<Tooltip>Clean Board</Tooltip>}
+        >
+          <TrashButton onClick={handleShowModal}>{"♻"}</TrashButton>
+        </OverlayTrigger>
+      </TrashContainer>
+      <Modal centered show={modalDisplayed} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to clean this board?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={cleanBoard}>
+            Clean
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }

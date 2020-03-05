@@ -38,7 +38,7 @@ export default class Column extends Component {
             isDragging={snapshot.isDragging}
           >
             <Form.Control
-              placeholder={task.id}
+              as="textarea"
               value={task.content}
               onChange={event => {
                 onTaskInputChange(event.target.value, task.id);

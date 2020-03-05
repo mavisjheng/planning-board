@@ -68,8 +68,6 @@ class InnerList extends Component {
 }
 
 export default class MemberTask extends Component {
-  state = { day: null };
-
   render() {
     const {
       member,
@@ -80,8 +78,14 @@ export default class MemberTask extends Component {
       onTaskInputChange,
       overloading,
       onSelectMemberDay,
-      onDeleteTask
+      onDeleteTask,
+      day
     } = this.props;
+
+    let remainingDays = day;
+    tasks.forEach(task => {
+      remainingDays -= task.day;
+    });
 
     return (
       <Draggable draggableId={member} index={index}>
@@ -96,31 +100,34 @@ export default class MemberTask extends Component {
               >
                 {member}
               </Name>
-              {overloading && (
-                <Alert variant="danger" className={"custom-overloaded-alert"}>
-                  overloaded
+              {day && (
+                <Alert
+                  variant={overloading ? "danger" : "info"}
+                  className={"custom-overloaded-alert"}
+                >
+                  {remainingDays} days left
                 </Alert>
               )}
               <Day>
                 <Dropdown
                   onSelect={day => {
-                    this.setState({ day });
                     onSelectMemberDay(day, member);
                   }}
                 >
                   <Dropdown.Toggle
                     variant="outline-secondary"
                     id="dropdown-basic"
-                    size={this.state.day ? "md" : "sm"}
+                    size="sm"
                     className={
-                      this.state.day
+                      day
                         ? "custom-dropdown-button"
                         : "custom-task-dropdown-button"
                     }
                   >
-                    {this.state.day ? this.state.day : "Days"}
+                    {day ? day : "Days"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
+                    <Dropdown.Item eventKey={-1}>-1</Dropdown.Item>
                     <Dropdown.Item eventKey={1}>1</Dropdown.Item>
                     <Dropdown.Item eventKey={2}>2</Dropdown.Item>
                     <Dropdown.Item eventKey={3}>3</Dropdown.Item>
@@ -154,7 +161,7 @@ export default class MemberTask extends Component {
                     onDeleteTask={onDeleteTask}
                   />
                   <div style={{ marginLeft: "8px" }}>
-                    {this.state.day && (
+                    {day && (
                       <Button
                         variant="light"
                         size="sm"

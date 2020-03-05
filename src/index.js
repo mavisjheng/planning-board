@@ -1,4 +1,4 @@
-import React, { Component, PureComponent, Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import "@atlaskit/css-reset";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,52 +7,30 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import teams from "./data/teams";
 import MemberTask from "./member-task";
 import TeamList from "./team-list";
+import { genRandomString } from "./utils";
 
 const Container = styled.div`
   display: flex;
   width: calc(100% - 160px);
 `;
 
-class InnerList extends PureComponent {
-  render() {
-    const {
-      index,
-      member,
-      tasks,
-      overloading,
-      onAddTask,
-      onSelectMemberDay,
-      onSelectTaskDay,
-      onTaskInputChange,
-      onDeleteTask
-    } = this.props;
-    return (
-      <MemberTask
-        index={index}
-        member={member}
-        overloading={overloading}
-        onAddTask={onAddTask}
-        tasks={tasks}
-        onSelectMemberDay={onSelectMemberDay}
-        onSelectTaskDay={onSelectTaskDay}
-        onDeleteTask={onDeleteTask}
-        onTaskInputChange={onTaskInputChange}
-      />
-    );
-  }
-}
-
 class App extends Component {
-  allTasks = 0;
-  state = {
-    selectedTeam: "",
-    memberOrder: [],
-    members: {},
-    tasks: {}
-  };
+  state = localStorage.getItem("planningBoard")
+    ? JSON.parse(localStorage.getItem("planningBoard"))
+    : {
+        selectedTeam: "",
+        memberOrder: [],
+        members: {},
+        tasks: {}
+      };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state !== prevState) {
+      localStorage.setItem("planningBoard", JSON.stringify(this.state));
+    }
+  }
 
   onDragEnd = result => {
-    // const { memberOrder } = this.state;
     const { destination, source, draggableId, type } = result;
 
     if (!destination) {
@@ -157,11 +135,32 @@ class App extends Component {
   };
 
   onSelectMemberDay = (day, member, previousSelectedDay) => {
-    const taskAmount = Object.keys(this.state.tasks).length;
+    const taskString = genRandomString();
+    const memberDay = Number(day);
+
+    // if day is -1, remove member and all his tasks
+    if (memberDay < 0) {
+      const newMemberOrder = this.state.memberOrder.filter(
+        name => name !== member
+      );
+      const memberTasks = this.state.members[member].taskIds;
+      memberTasks.forEach(taskId => {
+        delete this.state.tasks[taskId];
+      });
+
+      delete this.state.members[member];
+
+      this.setState({
+        members: this.state.members,
+        memberOrder: newMemberOrder,
+        tasks: this.state.tasks
+      });
+
+      return;
+    }
 
     // count if overloading
     let allTaskDays = 0;
-    const memberDay = Number(day);
     this.state.members[member].taskIds.forEach(taskId => {
       allTaskDays += Number(this.state.tasks[taskId].day);
     });
@@ -170,13 +169,12 @@ class App extends Component {
       !previousSelectedDay &&
       this.state.members[member].taskIds.length === 0
     ) {
-      this.allTasks++;
       this.setState({
         ...this.state,
         tasks: {
           ...this.state.tasks,
-          [`task-${taskAmount + 1}`]: {
-            id: `task-${taskAmount + 1}`,
+          [taskString]: {
+            id: taskString,
             content: "",
             day: null
           }
@@ -186,7 +184,7 @@ class App extends Component {
           [member]: {
             ...this.state.members[member],
             day,
-            taskIds: [`task-${taskAmount + 1}`],
+            taskIds: [taskString],
             overloading: allTaskDays > memberDay
           }
         }
@@ -208,8 +206,6 @@ class App extends Component {
   };
 
   onDeleteTask = (editedTaskId, day, member) => {
-    console.log(editedTaskId);
-
     const newTaskIds = Array.from(this.state.members[member].taskIds);
     const index = newTaskIds.indexOf(editedTaskId);
     newTaskIds.splice(index, 1);
@@ -272,18 +268,16 @@ class App extends Component {
   };
 
   onAddTask = member => {
-    this.allTasks++;
     const newTaskIds = Array.from(this.state.members[member].taskIds);
-    // const taskAmount = Object.keys(this.state.tasks).length;
-    const taskAmount = this.allTasks;
-    newTaskIds.push(`task-${taskAmount + 1}`);
+    const taskString = genRandomString();
+    newTaskIds.push(taskString);
 
     this.setState({
       ...this.state,
       tasks: {
         ...this.state.tasks,
-        [`task-${taskAmount + 1}`]: {
-          id: `task-${taskAmount + 1}`,
+        [taskString]: {
+          id: taskString,
           content: "",
           day: null
         }
@@ -314,7 +308,7 @@ class App extends Component {
 
   render() {
     const { selectedTeam, memberOrder, members, tasks } = this.state;
-    console.log(this.allTasks);
+    console.log(this.state);
     return (
       <Fragment>
         {selectedTeam && (
@@ -328,12 +322,13 @@ class App extends Component {
                 <Container {...provided.droppableProps} ref={provided.innerRef}>
                   {memberOrder.map((member, index) => {
                     return (
-                      <InnerList
+                      <MemberTask
                         key={`${selectedTeam}-${member}`}
                         index={index}
                         member={member}
                         overloading={members[member].overloading}
                         onAddTask={() => this.onAddTask(member)}
+                        day={members[member].day}
                         tasks={members[member].taskIds.map(
                           taskId => tasks[taskId]
                         )}
@@ -363,7 +358,7 @@ class App extends Component {
           </DragDropContext>
         )}
         <TeamList
-          onSelect={team => this.onTeamSelect(team)}
+          onSelectTeam={team => this.onTeamSelect(team)}
           selectedTeam={selectedTeam}
         />
       </Fragment>
