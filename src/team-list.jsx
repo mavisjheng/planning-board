@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Button, OverlayTrigger, Tooltip, Modal } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { FiChevronsDown, FiChevronsUp } from "react-icons/fi";
 import teams from "./data/teams";
 import "./custom.css";
 
-const SelectionContainer = styled.div`
+const ButtonContainer = styled.div`
   margin: 8px;
   position: absolute;
   top: 0px;
-  right: 0px;
-`;
-
-const TrashContainer = styled.div`
-  margin: 8px;
-  position: absolute;
-  bottom: 0px;
   right: 0px;
 `;
 
@@ -28,26 +22,18 @@ const TeamListContainer = styled.div`
   float: right;
 `;
 
-const CircleButton = styled.button`
+export const CircleButton = styled.button`
   border-radius: 50%;
-  width: 42px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border: 2px solid;
   text-align: center;
-  color: #bc9055;
-  font: 24px Arial;
+  color: black;
+  font: 22px Arial;
   outline: none;
   :focus {
     outline: none;
   }
-  :active {
-    border: 2px solid #e0ccb1;
-    color: #e0ccb1;
-  }
-`;
-
-const TrashButton = styled(CircleButton)`
-  color: black;
   :active {
     border: 2px solid lightgrey;
     color: lightgrey;
@@ -59,19 +45,9 @@ export default function TeamList({ selectedTeam, onSelectTeam }) {
   const handleToggleTeamList = teamListDisplayed =>
     setTeamListDisplayed(!teamListDisplayed);
 
-  const [modalDisplayed, setModalDisplayed] = useState(false);
-  const handleCloseModal = () => setModalDisplayed(false);
-  const handleShowModal = () => setModalDisplayed(true);
-
-  const cleanBoard = () => {
-    handleCloseModal();
-    localStorage.clear("planningBoard");
-    window.location.reload();
-  };
-
   return (
     <>
-      <SelectionContainer>
+      <ButtonContainer>
         <OverlayTrigger
           placement="left"
           overlay={
@@ -79,10 +55,16 @@ export default function TeamList({ selectedTeam, onSelectTeam }) {
           }
         >
           <CircleButton onClick={() => handleToggleTeamList(teamListDisplayed)}>
-            {teamListDisplayed ? "⩓" : selectedTeam ? selectedTeam[0] : "⩔"}
+            {teamListDisplayed ? (
+              <FiChevronsUp />
+            ) : selectedTeam ? (
+              selectedTeam[0]
+            ) : (
+              <FiChevronsDown />
+            )}
           </CircleButton>
         </OverlayTrigger>
-      </SelectionContainer>
+      </ButtonContainer>
       {teamListDisplayed && (
         <TeamListContainer>
           {teams.name.map((team, index) => (
@@ -97,28 +79,6 @@ export default function TeamList({ selectedTeam, onSelectTeam }) {
           ))}
         </TeamListContainer>
       )}
-      <TrashContainer>
-        <OverlayTrigger
-          placement="left"
-          overlay={<Tooltip>Clean Board</Tooltip>}
-        >
-          <TrashButton onClick={handleShowModal}>{"♻"}</TrashButton>
-        </OverlayTrigger>
-      </TrashContainer>
-      <Modal centered show={modalDisplayed} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirmation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to clean this board?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={cleanBoard}>
-            Clean
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 }

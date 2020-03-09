@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "@atlaskit/css-reset";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,6 +7,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import teams from "./data/teams";
 import MemberTask from "./member-task";
 import TeamList from "./team-list";
+import Toolbar from "./toolbar";
 import { genRandomString } from "./utils";
 
 const Container = styled.div`
@@ -306,11 +307,34 @@ class App extends Component {
     });
   };
 
+  onClickImport = () => {
+    const inputDOM = document.createElement("input");
+    inputDOM.type = "file";
+    inputDOM.onchange = this.readImportedTask;
+    inputDOM.click();
+  };
+
+  readImportedTask = evt => {
+    const file = evt.target.files[0];
+    const textType = /text.*/;
+    if (file.type.match(textType)) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const content = e.target.result;
+        this.setState(JSON.parse(content));
+      };
+      reader.readAsText(file);
+    } else {
+      alert("Unsupported file format");
+    }
+  };
+
   render() {
     const { selectedTeam, memberOrder, members, tasks } = this.state;
     console.log(this.state);
+
     return (
-      <Fragment>
+      <>
         {selectedTeam && (
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Droppable
@@ -361,7 +385,8 @@ class App extends Component {
           onSelectTeam={team => this.onTeamSelect(team)}
           selectedTeam={selectedTeam}
         />
-      </Fragment>
+        <Toolbar onClickImport={this.onClickImport} />
+      </>
     );
   }
 }
