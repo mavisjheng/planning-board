@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/pages/mavisjheng/planning-board/static/css/main.e8c099f0.chunk.css",
-    "main.js": "/pages/mavisjheng/planning-board/static/js/main.cf53c181.chunk.js",
-    "main.js.map": "/pages/mavisjheng/planning-board/static/js/main.cf53c181.chunk.js.map",
-    "runtime-main.js": "/pages/mavisjheng/planning-board/static/js/runtime-main.dbb3e952.js",
-    "runtime-main.js.map": "/pages/mavisjheng/planning-board/static/js/runtime-main.dbb3e952.js.map",
-    "static/css/2.83512975.chunk.css": "/pages/mavisjheng/planning-board/static/css/2.83512975.chunk.css",
-    "static/js/2.b24ef738.chunk.js": "/pages/mavisjheng/planning-board/static/js/2.b24ef738.chunk.js",
-    "static/js/2.b24ef738.chunk.js.map": "/pages/mavisjheng/planning-board/static/js/2.b24ef738.chunk.js.map",
-    "index.html": "/pages/mavisjheng/planning-board/index.html",
-    "precache-manifest.e60225c237cbf644e44246b782aa35c6.js": "/pages/mavisjheng/planning-board/precache-manifest.e60225c237cbf644e44246b782aa35c6.js",
-    "service-worker.js": "/pages/mavisjheng/planning-board/service-worker.js",
-    "static/css/2.83512975.chunk.css.map": "/pages/mavisjheng/planning-board/static/css/2.83512975.chunk.css.map",
-    "static/css/main.e8c099f0.chunk.css.map": "/pages/mavisjheng/planning-board/static/css/main.e8c099f0.chunk.css.map",
-    "static/js/2.b24ef738.chunk.js.LICENSE.txt": "/pages/mavisjheng/planning-board/static/js/2.b24ef738.chunk.js.LICENSE.txt"
+    "main.css": "/mavisjheng.github.io/planning-board/static/css/main.e8c099f0.chunk.css",
+    "main.js": "/mavisjheng.github.io/planning-board/static/js/main.cf53c181.chunk.js",
+    "main.js.map": "/mavisjheng.github.io/planning-board/static/js/main.cf53c181.chunk.js.map",
+    "runtime-main.js": "/mavisjheng.github.io/planning-board/static/js/runtime-main.4951db2b.js",
+    "runtime-main.js.map": "/mavisjheng.github.io/planning-board/static/js/runtime-main.4951db2b.js.map",
+    "static/css/2.83512975.chunk.css": "/mavisjheng.github.io/planning-board/static/css/2.83512975.chunk.css",
+    "static/js/2.827b2233.chunk.js": "/mavisjheng.github.io/planning-board/static/js/2.827b2233.chunk.js",
+    "static/js/2.827b2233.chunk.js.map": "/mavisjheng.github.io/planning-board/static/js/2.827b2233.chunk.js.map",
+    "index.html": "/mavisjheng.github.io/planning-board/index.html",
+    "precache-manifest.1c8095b6a36904b816e7ee35a7e00e33.js": "/mavisjheng.github.io/planning-board/precache-manifest.1c8095b6a36904b816e7ee35a7e00e33.js",
+    "service-worker.js": "/mavisjheng.github.io/planning-board/service-worker.js",
+    "static/css/2.83512975.chunk.css.map": "/mavisjheng.github.io/planning-board/static/css/2.83512975.chunk.css.map",
+    "static/css/main.e8c099f0.chunk.css.map": "/mavisjheng.github.io/planning-board/static/css/main.e8c099f0.chunk.css.map",
+    "static/js/2.827b2233.chunk.js.LICENSE.txt": "/mavisjheng.github.io/planning-board/static/js/2.827b2233.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.dbb3e952.js",
+    "static/js/runtime-main.4951db2b.js",
     "static/css/2.83512975.chunk.css",
-    "static/js/2.b24ef738.chunk.js",
+    "static/js/2.827b2233.chunk.js",
     "static/css/main.e8c099f0.chunk.css",
     "static/js/main.cf53c181.chunk.js"
   ]
