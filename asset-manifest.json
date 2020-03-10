@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/mavisjheng.github.io/planning-board/static/css/main.e8c099f0.chunk.css",
-    "main.js": "/mavisjheng.github.io/planning-board/static/js/main.cf53c181.chunk.js",
-    "main.js.map": "/mavisjheng.github.io/planning-board/static/js/main.cf53c181.chunk.js.map",
-    "runtime-main.js": "/mavisjheng.github.io/planning-board/static/js/runtime-main.4951db2b.js",
-    "runtime-main.js.map": "/mavisjheng.github.io/planning-board/static/js/runtime-main.4951db2b.js.map",
-    "static/css/2.83512975.chunk.css": "/mavisjheng.github.io/planning-board/static/css/2.83512975.chunk.css",
-    "static/js/2.827b2233.chunk.js": "/mavisjheng.github.io/planning-board/static/js/2.827b2233.chunk.js",
-    "static/js/2.827b2233.chunk.js.map": "/mavisjheng.github.io/planning-board/static/js/2.827b2233.chunk.js.map",
-    "index.html": "/mavisjheng.github.io/planning-board/index.html",
-    "precache-manifest.1c8095b6a36904b816e7ee35a7e00e33.js": "/mavisjheng.github.io/planning-board/precache-manifest.1c8095b6a36904b816e7ee35a7e00e33.js",
-    "service-worker.js": "/mavisjheng.github.io/planning-board/service-worker.js",
-    "static/css/2.83512975.chunk.css.map": "/mavisjheng.github.io/planning-board/static/css/2.83512975.chunk.css.map",
-    "static/css/main.e8c099f0.chunk.css.map": "/mavisjheng.github.io/planning-board/static/css/main.e8c099f0.chunk.css.map",
-    "static/js/2.827b2233.chunk.js.LICENSE.txt": "/mavisjheng.github.io/planning-board/static/js/2.827b2233.chunk.js.LICENSE.txt"
+    "main.css": "/planning-board/static/css/main.e8c099f0.chunk.css",
+    "main.js": "/planning-board/static/js/main.cf53c181.chunk.js",
+    "main.js.map": "/planning-board/static/js/main.cf53c181.chunk.js.map",
+    "runtime-main.js": "/planning-board/static/js/runtime-main.50b7d9e1.js",
+    "runtime-main.js.map": "/planning-board/static/js/runtime-main.50b7d9e1.js.map",
+    "static/css/2.83512975.chunk.css": "/planning-board/static/css/2.83512975.chunk.css",
+    "static/js/2.72db7854.chunk.js": "/planning-board/static/js/2.72db7854.chunk.js",
+    "static/js/2.72db7854.chunk.js.map": "/planning-board/static/js/2.72db7854.chunk.js.map",
+    "index.html": "/planning-board/index.html",
+    "precache-manifest.fb3d6562d0fb69089168d68549a3cbbc.js": "/planning-board/precache-manifest.fb3d6562d0fb69089168d68549a3cbbc.js",
+    "service-worker.js": "/planning-board/service-worker.js",
+    "static/css/2.83512975.chunk.css.map": "/planning-board/static/css/2.83512975.chunk.css.map",
+    "static/css/main.e8c099f0.chunk.css.map": "/planning-board/static/css/main.e8c099f0.chunk.css.map",
+    "static/js/2.72db7854.chunk.js.LICENSE.txt": "/planning-board/static/js/2.72db7854.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.4951db2b.js",
+    "static/js/runtime-main.50b7d9e1.js",
     "static/css/2.83512975.chunk.css",
-    "static/js/2.827b2233.chunk.js",
+    "static/js/2.72db7854.chunk.js",
     "static/css/main.e8c099f0.chunk.css",
     "static/js/main.cf53c181.chunk.js"
   ]
