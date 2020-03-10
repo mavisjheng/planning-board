@@ -5,6 +5,7 @@ import { Form, Dropdown } from "react-bootstrap";
 import { fourteenDays } from './constants';
 
 const Container = styled.div`
+  width: 100%;
   border: none;
   border-radius: 5px;
   padding: 8px;
@@ -15,7 +16,8 @@ const Container = styled.div`
 const DropdownContainer = styled.div`
   align-items: center;
   display: flex;
-  margin-right: -12px;
+  margin-right: -10px;
+  margin-left: 2px;
 `;
 
 export default class Column extends Component {
@@ -41,6 +43,7 @@ export default class Column extends Component {
             <Form.Control
               as="textarea"
               value={task.content}
+              className="custom-form-textarea"
               onChange={event => {
                 onTaskInputChange(event.target.value, task.id);
               }}

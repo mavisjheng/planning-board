@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { Dropdown, Button, Alert } from "react-bootstrap";
+import { Dropdown, Button, Badge } from "react-bootstrap";
 import Task from "./task";
 import { fourteenDays } from './constants';
 import "./custom.css";
@@ -10,31 +10,33 @@ const Container = styled.div`
   margin: 8px;
   background-color: white;
   border-radius: 4px;
-  width: 220px;
-  display: flex;
-  flex-direction: column;
   border: 1px solid lightgrey;
+  width: 160px;
 `;
 
-const Day = styled.div`
-  float: right;
-  margin-top: -24px;
-  margin-bottom: -16px;
+const MemberInfoContainer = styled.div`
+  width: 100%;
 `;
 
-const Name = styled.h4`
+const Name = styled.h5`
+  margin-bottom: -6px;
   padding: 8px;
   text-align: center;
   color: SteelBlue;
 `;
 
+const DayContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const TaskList = styled.div`
-  padding: 8px;
+  width: 150px;
   transition: background-color 0.2s ease;
   background-color: ${props =>
     props.isDraggingOver ? "lightblue" : "inherit"};
-  flex-grow: 1;
-  min-height: 100px;
+  min-height: 300px;
 `;
 
 class InnerList extends Component {
@@ -92,24 +94,16 @@ export default class MemberTask extends Component {
       <Draggable draggableId={member} index={index}>
         {provided => (
           <Container {...provided.draggableProps} ref={provided.innerRef}>
-            <div>
-              <Name
-                {...provided.dragHandleProps}
-                style={{
-                  marginBottom: `${overloading ? "-4px" : "0"}`
-                }}
-              >
+            <MemberInfoContainer>
+              <Name {...provided.dragHandleProps}>
                 {member}
               </Name>
-              {day && (
-                <Alert
-                  variant={overloading ? "danger" : "info"}
-                  className={"custom-overloaded-alert"}
-                >
-                  {remainingDays} days left
-                </Alert>
-              )}
-              <Day>
+              <DayContainer>
+                {day && (
+                  <Badge variant={overloading ? "danger" : "info"}>
+                    {remainingDays} days left
+                  </Badge>
+                )}
                 <Dropdown
                   onSelect={day => {
                     onSelectMemberDay(day, member);
@@ -119,11 +113,7 @@ export default class MemberTask extends Component {
                     variant="outline-secondary"
                     id="dropdown-basic"
                     size="sm"
-                    className={
-                      day
-                        ? "custom-dropdown-button"
-                        : "custom-task-dropdown-button"
-                    }
+                    className="custom-dropdown-button"
                   >
                     {day ? day : "Days"}
                   </Dropdown.Toggle>
@@ -131,8 +121,8 @@ export default class MemberTask extends Component {
                     {fourteenDays.map(number=> <Dropdown.Item key={number} eventKey={number}>{number}</Dropdown.Item>)}
                   </Dropdown.Menu>
                 </Dropdown>
-              </Day>
-            </div>
+              </DayContainer>
+            </MemberInfoContainer>
             <Droppable droppableId={member} type="task">
               {(provided, snapshot) => (
                 <TaskList
@@ -147,7 +137,7 @@ export default class MemberTask extends Component {
                     onTaskInputChange={onTaskInputChange}
                     onDeleteTask={onDeleteTask}
                   />
-                  <div style={{ marginLeft: "8px" }}>
+                  <div style={{ float: "right", marginRight: "8px", marginBottom: "8px" }}>
                     {day && (
                       <Button
                         variant="light"

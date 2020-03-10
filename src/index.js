@@ -13,6 +13,7 @@ import { genRandomString } from "./utils";
 const Container = styled.div`
   display: flex;
   width: calc(100% - 160px);
+  min-height: 100%;
 `;
 
 class App extends Component {

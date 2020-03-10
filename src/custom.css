@@ -4,14 +4,12 @@
 
 .custom-dropdown-button {
   border: 0;
-  font-weight: 600;
-  color: green;
-  font-size: 18px;
-  margin-top: -4px;
+  margin-left: 4px;
 }
 
 .custom-task-dropdown-button {
   border: 0;
+  margin-left: -2px;
 }
 
 .add-task-button {
@@ -19,9 +17,8 @@
   margin-top: 2px;
 }
 
-.custom-overloaded-alert {
-  text-align: center;
-  padding: 4px 8px;
-  display: table;
-  margin: 0 auto;
+.custom-form-textarea {
+  padding: 4px;
+  font-size: 12px;
+  min-height: 80px;
 }
