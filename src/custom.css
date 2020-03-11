@@ -1,24 +1,23 @@
-.custom-team-button {
-  margin: 4px 8px;
-}
-
-.custom-dropdown-button {
+.day-dropdown-button {
   border: 0;
-  margin-left: 4px;
-}
-
-.custom-task-dropdown-button {
-  border: 0;
-  margin-left: -2px;
+  font-size: 12px;
 }
 
 .add-task-button {
   color: SteelBlue;
-  margin-top: 2px;
 }
 
-.custom-form-textarea {
+.task-form-textarea {
   padding: 4px;
   font-size: 12px;
   min-height: 80px;
+}
+
+.nav-toolbar {
+  background-color: #ececec !important;
+}
+
+.team-dropdown-item:focus {
+  background-color: white !important;
+  color: black;
 }

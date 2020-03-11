@@ -10,14 +10,12 @@ const Container = styled.div`
   border-radius: 5px;
   padding: 8px;
   background-color: ${props => (props.isDragging ? "lightyellow" : "white")};
-  display: flex;
 `;
 
 const DropdownContainer = styled.div`
-  align-items: center;
-  display: flex;
-  margin-right: -10px;
-  margin-left: 2px;
+  float: right;
+  margin-top: -2px;
+  margin-bottom: 8px;
 `;
 
 export default class Column extends Component {
@@ -43,33 +41,32 @@ export default class Column extends Component {
             <Form.Control
               as="textarea"
               value={task.content}
-              className="custom-form-textarea"
+              className="task-form-textarea"
               onChange={event => {
                 onTaskInputChange(event.target.value, task.id);
               }}
             />
-            <DropdownContainer>
-              <Dropdown
-                onSelect={day => {
-                  day < 0
-                    ? onDeleteTask(task.id, day, member)
-                    : onSelectTaskDay(task.id, day, member);
-                }}
+          <DropdownContainer>
+            <Dropdown
+              onSelect={day => {
+                day < 0
+                  ? onDeleteTask(task.id, day, member)
+                  : onSelectTaskDay(task.id, day, member);
+              }}
+            >
+              <Dropdown.Toggle
+                variant="outline-secondary"
+                size="sm"
+                className="day-dropdown-button"
               >
-                <Dropdown.Toggle
-                  variant="outline-secondary"
-                  id="dropdown-basic"
-                  size="sm"
-                  className="custom-task-dropdown-button"
-                >
-                  {day}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {fourteenDays.map(number=> <Dropdown.Item key={number} eventKey={number}>{number}</Dropdown.Item>)}
-                </Dropdown.Menu>
-              </Dropdown>
-            </DropdownContainer>
-          </Container>
+                {day}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                {fourteenDays.map(number=> <Dropdown.Item key={number} eventKey={number}>{number}</Dropdown.Item>)}
+              </Dropdown.Menu>
+            </Dropdown>
+          </DropdownContainer>
+        </Container>
         )}
       </Draggable>
     );

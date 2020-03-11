@@ -31,12 +31,19 @@ const DayContainer = styled.div`
   justify-content: center;
 `;
 
+const AddTaskContainer = styled.div`
+  float: right;
+  clear: both;
+  margin-right: 4px;
+  margin-bottom: 4px;
+`;
+
 const TaskList = styled.div`
   width: 150px;
   transition: background-color 0.2s ease;
   background-color: ${props =>
     props.isDraggingOver ? "lightblue" : "inherit"};
-  min-height: 300px;
+  min-height: 480px
 `;
 
 class InnerList extends Component {
@@ -113,7 +120,7 @@ export default class MemberTask extends Component {
                     variant="outline-secondary"
                     id="dropdown-basic"
                     size="sm"
-                    className="custom-dropdown-button"
+                    className="day-dropdown-button"
                   >
                     {day ? day : "Days"}
                   </Dropdown.Toggle>
@@ -137,7 +144,7 @@ export default class MemberTask extends Component {
                     onTaskInputChange={onTaskInputChange}
                     onDeleteTask={onDeleteTask}
                   />
-                  <div style={{ float: "right", marginRight: "8px", marginBottom: "8px" }}>
+                  <AddTaskContainer>
                     {day && (
                       <Button
                         variant="light"
@@ -148,7 +155,7 @@ export default class MemberTask extends Component {
                         Add Task
                       </Button>
                     )}
-                  </div>
+                  </AddTaskContainer>
                   {provided.placeholder}
                 </TaskList>
               )}
