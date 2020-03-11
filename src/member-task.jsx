@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { Dropdown, Button, Badge } from "react-bootstrap";
 import Task from "./task";
-import { fourteenDays } from './constants';
-import "./custom.css";
+import { fourteenDays } from "./constants";
+import "./style.css";
 
 const Container = styled.div`
   margin: 8px;
@@ -31,12 +31,19 @@ const DayContainer = styled.div`
   justify-content: center;
 `;
 
+const AddTaskContainer = styled.div`
+  float: right;
+  clear: both;
+  margin-right: -4px;
+  margin-bottom: 4px;
+`;
+
 const TaskList = styled.div`
   width: 150px;
   transition: background-color 0.2s ease;
   background-color: ${props =>
     props.isDraggingOver ? "lightblue" : "inherit"};
-  min-height: 300px;
+  min-height: 480px;
 `;
 
 class InnerList extends Component {
@@ -95,9 +102,7 @@ export default class MemberTask extends Component {
         {provided => (
           <Container {...provided.draggableProps} ref={provided.innerRef}>
             <MemberInfoContainer>
-              <Name {...provided.dragHandleProps}>
-                {member}
-              </Name>
+              <Name {...provided.dragHandleProps}>{member}</Name>
               <DayContainer>
                 {day && (
                   <Badge variant={overloading ? "danger" : "info"}>
@@ -113,12 +118,16 @@ export default class MemberTask extends Component {
                     variant="outline-secondary"
                     id="dropdown-basic"
                     size="sm"
-                    className="custom-dropdown-button"
+                    className="day-dropdown-button"
                   >
                     {day ? day : "Days"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    {fourteenDays.map(number=> <Dropdown.Item key={number} eventKey={number}>{number}</Dropdown.Item>)}
+                    {fourteenDays.map(number => (
+                      <Dropdown.Item key={number} eventKey={number}>
+                        {number}
+                      </Dropdown.Item>
+                    ))}
                   </Dropdown.Menu>
                 </Dropdown>
               </DayContainer>
@@ -137,7 +146,7 @@ export default class MemberTask extends Component {
                     onTaskInputChange={onTaskInputChange}
                     onDeleteTask={onDeleteTask}
                   />
-                  <div style={{ float: "right", marginRight: "8px", marginBottom: "8px" }}>
+                  <AddTaskContainer>
                     {day && (
                       <Button
                         variant="light"
@@ -148,7 +157,7 @@ export default class MemberTask extends Component {
                         Add Task
                       </Button>
                     )}
-                  </div>
+                  </AddTaskContainer>
                   {provided.placeholder}
                 </TaskList>
               )}

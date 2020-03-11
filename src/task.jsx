@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import { Form, Dropdown } from "react-bootstrap";
-import { fourteenDays } from './constants';
+import { fourteenDays } from "./constants";
 
 const Container = styled.div`
   width: 100%;
@@ -10,14 +10,12 @@ const Container = styled.div`
   border-radius: 5px;
   padding: 8px;
   background-color: ${props => (props.isDragging ? "lightyellow" : "white")};
-  display: flex;
 `;
 
 const DropdownContainer = styled.div`
-  align-items: center;
-  display: flex;
-  margin-right: -10px;
-  margin-left: 2px;
+  float: right;
+  margin-top: -2px;
+  margin-bottom: 8px;
 `;
 
 export default class Column extends Component {
@@ -43,7 +41,7 @@ export default class Column extends Component {
             <Form.Control
               as="textarea"
               value={task.content}
-              className="custom-form-textarea"
+              className="task-form-textarea"
               onChange={event => {
                 onTaskInputChange(event.target.value, task.id);
               }}
@@ -58,14 +56,17 @@ export default class Column extends Component {
               >
                 <Dropdown.Toggle
                   variant="outline-secondary"
-                  id="dropdown-basic"
                   size="sm"
-                  className="custom-task-dropdown-button"
+                  className="day-dropdown-button"
                 >
                   {day}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  {fourteenDays.map(number=> <Dropdown.Item key={number} eventKey={number}>{number}</Dropdown.Item>)}
+                  {fourteenDays.map(number => (
+                    <Dropdown.Item key={number} eventKey={number}>
+                      {number}
+                    </Dropdown.Item>
+                  ))}
                 </Dropdown.Menu>
               </Dropdown>
             </DropdownContainer>

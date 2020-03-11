@@ -6,14 +6,13 @@ import styled from "styled-components";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import teams from "./data/teams";
 import MemberTask from "./member-task";
-import TeamList from "./team-list";
 import Toolbar from "./toolbar";
 import { genRandomString } from "./utils";
 
 const Container = styled.div`
   display: flex;
-  width: calc(100% - 160px);
-  min-height: 100%;
+  overflow: auto;
+  margin-right: 8px;
 `;
 
 class App extends Component {
@@ -336,6 +335,11 @@ class App extends Component {
 
     return (
       <>
+        <Toolbar
+          onClickImport={this.onClickImport}
+          onSelectTeam={team => this.onTeamSelect(team)}
+          selectedTeam={selectedTeam}
+        />
         {selectedTeam && (
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Droppable
@@ -382,11 +386,6 @@ class App extends Component {
             </Droppable>
           </DragDropContext>
         )}
-        <TeamList
-          onSelectTeam={team => this.onTeamSelect(team)}
-          selectedTeam={selectedTeam}
-        />
-        <Toolbar onClickImport={this.onClickImport} />
       </>
     );
   }
