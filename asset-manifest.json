@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/planning-board/static/css/main.e8c099f0.chunk.css",
-    "main.js": "/planning-board/static/js/main.cf53c181.chunk.js",
-    "main.js.map": "/planning-board/static/js/main.cf53c181.chunk.js.map",
-    "runtime-main.js": "/planning-board/static/js/runtime-main.50b7d9e1.js",
-    "runtime-main.js.map": "/planning-board/static/js/runtime-main.50b7d9e1.js.map",
-    "static/css/2.83512975.chunk.css": "/planning-board/static/css/2.83512975.chunk.css",
-    "static/js/2.72db7854.chunk.js": "/planning-board/static/js/2.72db7854.chunk.js",
-    "static/js/2.72db7854.chunk.js.map": "/planning-board/static/js/2.72db7854.chunk.js.map",
+    "main.css": "/planning-board/static/css/main.16c92797.chunk.css",
+    "main.js": "/planning-board/static/js/main.6d10ca64.chunk.js",
+    "main.js.map": "/planning-board/static/js/main.6d10ca64.chunk.js.map",
+    "runtime-main.js": "/planning-board/static/js/runtime-main.11391e42.js",
+    "runtime-main.js.map": "/planning-board/static/js/runtime-main.11391e42.js.map",
+    "static/css/2.a3aef58e.chunk.css": "/planning-board/static/css/2.a3aef58e.chunk.css",
+    "static/js/2.084bca6a.chunk.js": "/planning-board/static/js/2.084bca6a.chunk.js",
+    "static/js/2.084bca6a.chunk.js.map": "/planning-board/static/js/2.084bca6a.chunk.js.map",
     "index.html": "/planning-board/index.html",
-    "precache-manifest.fb3d6562d0fb69089168d68549a3cbbc.js": "/planning-board/precache-manifest.fb3d6562d0fb69089168d68549a3cbbc.js",
+    "precache-manifest.15a3605366cd4aa298cd69c7c3027649.js": "/planning-board/precache-manifest.15a3605366cd4aa298cd69c7c3027649.js",
     "service-worker.js": "/planning-board/service-worker.js",
-    "static/css/2.83512975.chunk.css.map": "/planning-board/static/css/2.83512975.chunk.css.map",
-    "static/css/main.e8c099f0.chunk.css.map": "/planning-board/static/css/main.e8c099f0.chunk.css.map",
-    "static/js/2.72db7854.chunk.js.LICENSE.txt": "/planning-board/static/js/2.72db7854.chunk.js.LICENSE.txt"
+    "static/css/2.a3aef58e.chunk.css.map": "/planning-board/static/css/2.a3aef58e.chunk.css.map",
+    "static/css/main.16c92797.chunk.css.map": "/planning-board/static/css/main.16c92797.chunk.css.map",
+    "static/js/2.084bca6a.chunk.js.LICENSE.txt": "/planning-board/static/js/2.084bca6a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.50b7d9e1.js",
-    "static/css/2.83512975.chunk.css",
-    "static/js/2.72db7854.chunk.js",
-    "static/css/main.e8c099f0.chunk.css",
-    "static/js/main.cf53c181.chunk.js"
+    "static/js/runtime-main.11391e42.js",
+    "static/css/2.a3aef58e.chunk.css",
+    "static/js/2.084bca6a.chunk.js",
+    "static/css/main.16c92797.chunk.css",
+    "static/js/main.6d10ca64.chunk.js"
   ]
 }
