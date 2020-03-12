@@ -86,7 +86,6 @@ export default class MemberTask extends Component {
       onSelectTaskDay,
       onAddTask,
       onTaskInputChange,
-      overloading,
       onSelectMemberDay,
       onDeleteTask,
       day
@@ -105,7 +104,7 @@ export default class MemberTask extends Component {
               <Name {...provided.dragHandleProps}>{member}</Name>
               <DayContainer>
                 {day && (
-                  <Badge variant={overloading ? "danger" : "info"}>
+                  <Badge variant={remainingDays < 0 ? "danger" : "info"}>
                     {remainingDays} days left
                   </Badge>
                 )}
@@ -123,6 +122,7 @@ export default class MemberTask extends Component {
                     {day ? day : "Days"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
+                    <Dropdown.Item eventKey={-1}>Remove</Dropdown.Item>
                     {fourteenDays.map(number => (
                       <Dropdown.Item key={number} eventKey={number}>
                         {number}

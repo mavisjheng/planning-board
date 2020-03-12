@@ -5,26 +5,22 @@ const stateData = {
     Alvin: {
       id: "Alvin",
       day: "6",
-      taskIds: ["task-1", "task-2"],
-      overloading: false
+      taskIds: ["task-1", "task-2"]
     },
     Chuck: {
       id: "Chuck",
       day: "7",
-      taskIds: ["task-3", "task-4"],
-      overloading: false
+      taskIds: ["task-3", "task-4"]
     },
     David: {
       id: "David",
       day: "9",
-      taskIds: ["task-5"],
-      overloading: false
+      taskIds: ["task-5"]
     },
     Jack: {
       id: "Jack",
       day: "9",
-      taskIds: ["task-6"],
-      overloading: true
+      taskIds: ["task-6"]
     }
   },
   tasks: {

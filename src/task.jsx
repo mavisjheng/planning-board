@@ -62,6 +62,7 @@ export default class Column extends Component {
                   {day}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item eventKey={-1}>Remove</Dropdown.Item>
                   {fourteenDays.map(number => (
                     <Dropdown.Item key={number} eventKey={number}>
                       {number}

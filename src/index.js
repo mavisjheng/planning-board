@@ -82,31 +82,17 @@ class App extends Component {
     const startTaskIds = Array.from(start.taskIds);
     startTaskIds.splice(source.index, 1);
 
-    const sourceMemberDays = Number(this.state.members[start.id].day);
-    let sourceTaskDays = 0;
-    startTaskIds.forEach(taskId => {
-      sourceTaskDays += Number(this.state.tasks[taskId].day);
-    });
-
     const newStart = {
       ...start,
-      taskIds: startTaskIds,
-      overloading: sourceTaskDays > sourceMemberDays
+      taskIds: startTaskIds
     };
 
     const finishTaskIds = Array.from(finish.taskIds);
     finishTaskIds.splice(destination.index, 0, draggableId);
 
-    const destinationMemberDays = Number(this.state.members[finish.id].day);
-    let destinationTaskDays = 0;
-    finishTaskIds.forEach(taskId => {
-      destinationTaskDays += Number(this.state.tasks[taskId].day);
-    });
-
     const newFinish = {
       ...finish,
-      taskIds: finishTaskIds,
-      overloading: destinationTaskDays > destinationMemberDays
+      taskIds: finishTaskIds
     };
 
     const newMembers = {
@@ -160,12 +146,6 @@ class App extends Component {
       return;
     }
 
-    // count if overloading
-    let allTaskDays = 0;
-    this.state.members[member].taskIds.forEach(taskId => {
-      allTaskDays += Number(this.state.tasks[taskId].day);
-    });
-
     if (
       !previousSelectedDay &&
       this.state.members[member].taskIds.length === 0
@@ -185,16 +165,14 @@ class App extends Component {
           [member]: {
             ...this.state.members[member],
             day,
-            taskIds: [taskString],
-            overloading: allTaskDays > memberDay
+            taskIds: [taskString]
           }
         }
       });
     } else {
       const newMember = {
         ...this.state.members[member],
-        day,
-        overloading: allTaskDays > memberDay
+        day
       };
 
       const newMembers = {
@@ -213,13 +191,6 @@ class App extends Component {
 
     delete this.state.tasks[editedTaskId];
 
-    // count if overloading
-    const memberDay = Number(this.state.members[member].day);
-    let allTaskDays = 0;
-    newTaskIds.forEach(taskId => {
-      allTaskDays += Number(this.state.tasks[taskId].day);
-    });
-
     this.setState({
       ...this.state,
       tasks: this.state.tasks,
@@ -227,17 +198,13 @@ class App extends Component {
         ...this.state.members,
         [member]: {
           ...this.state.members[member],
-          taskIds: newTaskIds,
-          overloading: allTaskDays > memberDay
+          taskIds: newTaskIds
         }
       }
     });
   };
 
   onSelectTaskDay = (editedTaskId, day, member) => {
-    const memberDay = Number(this.state.members[member].day);
-    let allTaskDays = Number(day);
-
     const newTasks = {
       ...this.state.tasks,
       [editedTaskId]: {
@@ -250,16 +217,8 @@ class App extends Component {
       tasks: newTasks
     });
 
-    // count if overloading
-    this.state.members[member].taskIds.forEach(taskId => {
-      if (editedTaskId !== taskId) {
-        allTaskDays += Number(this.state.tasks[taskId].day);
-      }
-    });
-
     const newMember = {
-      ...this.state.members[member],
-      overloading: allTaskDays > memberDay
+      ...this.state.members[member]
     };
     const newMembers = {
       ...this.state.members,
@@ -355,7 +314,6 @@ class App extends Component {
                         key={`${selectedTeam}-${member}`}
                         index={index}
                         member={member}
-                        overloading={members[member].overloading}
                         onAddTask={() => this.onAddTask(member)}
                         day={members[member].day}
                         tasks={members[member].taskIds.map(
