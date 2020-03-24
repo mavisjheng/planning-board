@@ -273,6 +273,22 @@ class App extends Component {
     inputDOM.click();
   };
 
+  onAddMember = name => {
+    const newMemberOrder = Array.from(this.state.memberOrder);
+    newMemberOrder.push(name);
+    this.setState({
+      memberOrder: newMemberOrder,
+      members: {
+        ...this.state.members,
+        [name]: {
+          id: name,
+          day: null,
+          taskIds: []
+        }
+      }
+    })
+  }
+
   readImportedTask = evt => {
     const file = evt.target.files[0];
     const textType = /text.*/;
@@ -290,7 +306,6 @@ class App extends Component {
 
   render() {
     const { selectedTeam, memberOrder, members, tasks } = this.state;
-    console.log(this.state);
 
     return (
       <>
@@ -298,6 +313,7 @@ class App extends Component {
           onClickImport={this.onClickImport}
           onSelectTeam={team => this.onTeamSelect(team)}
           selectedTeam={selectedTeam}
+          onAddMember={this.onAddMember}
         />
         {selectedTeam && (
           <DragDropContext onDragEnd={this.onDragEnd}>

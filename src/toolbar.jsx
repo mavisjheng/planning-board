@@ -6,9 +6,10 @@ import {
   Tooltip,
   Modal,
   Navbar,
-  Dropdown
+  Dropdown,
+  Form
 } from "react-bootstrap";
-import { FiTrash2 } from "react-icons/fi";
+import { FiTrash2, FiUserPlus } from "react-icons/fi";
 import { AiOutlineDownload, AiOutlineImport } from "react-icons/ai";
 import teams from "./data/teams";
 import "./style.css";
@@ -41,16 +42,24 @@ const ToolButton = styled.button`
   }
 `;
 
-export default function Toolbar({ onClickImport, onSelectTeam, selectedTeam }) {
-  const [modalDisplayed, setModalDisplayed] = useState(false);
-  const handleCloseModal = () => setModalDisplayed(false);
-  const handleShowModal = () => setModalDisplayed(true);
+export default function Toolbar({ onClickImport, onSelectTeam, selectedTeam, onAddMember }) {
+  const [cleanBoardModalDisplayed, setCleanBoardModalDisplayed] = useState(false);
+  const handleCloseCleanBoardModal = () => setCleanBoardModalDisplayed(false);
+  const handleShowCleanBoardModal = () => setCleanBoardModalDisplayed(true);
 
   const cleanBoard = () => {
-    handleCloseModal();
+    handleCloseCleanBoardModal();
     localStorage.clear("planningBoard");
     window.location.reload();
   };
+
+  const [memberName, setMemberName] = useState('');
+  const [addMemberModalDisplayed, setAddMemberModalDisplayed] = useState(false);
+  const handleCloseAddMemberModal = () => {
+    setAddMemberModalDisplayed(false);
+    setMemberName('');
+  }
+  const handleShowAddMemberModal = () => setAddMemberModalDisplayed(true);
 
   const exportFile = (content, fileName, contentType) => {
     const linkDOM = document.createElement("a");
@@ -69,7 +78,7 @@ export default function Toolbar({ onClickImport, onSelectTeam, selectedTeam }) {
             placement="bottom"
             overlay={<Tooltip>Clean Board</Tooltip>}
           >
-            <ToolButton onClick={handleShowModal}>
+            <ToolButton onClick={handleShowCleanBoardModal}>
               <FiTrash2 />
             </ToolButton>
           </OverlayTrigger>
@@ -101,6 +110,16 @@ export default function Toolbar({ onClickImport, onSelectTeam, selectedTeam }) {
               <AiOutlineImport />
             </ToolButton>
           </OverlayTrigger>
+          {selectedTeam &&
+            <OverlayTrigger
+              placement="bottom"
+              overlay={<Tooltip>Add Member</Tooltip>}
+            >
+              <ToolButton onClick={handleShowAddMemberModal}>
+                <FiUserPlus />
+              </ToolButton>
+            </OverlayTrigger>
+          }
           <Dropdown onSelect={team => onSelectTeam(team)}>
             <Dropdown.Toggle variant="info">
               {selectedTeam ? selectedTeam : "Select Team"}
@@ -119,13 +138,35 @@ export default function Toolbar({ onClickImport, onSelectTeam, selectedTeam }) {
           </Dropdown>
         </Container>
       </Navbar>
-      <Modal centered show={modalDisplayed} onHide={handleCloseModal}>
+      <Modal centered show={addMemberModalDisplayed} onHide={handleCloseAddMemberModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Member</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Control placeholder="Enter name" value={memberName} onChange={event => setMemberName(event.target.value)}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseAddMemberModal}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            disabled={!memberName}
+            onClick={() => {
+              onAddMember(memberName);
+              handleCloseAddMemberModal();
+            }}>
+            Add
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal centered show={cleanBoardModalDisplayed} onHide={handleCloseCleanBoardModal}>
         <Modal.Header closeButton>
           <Modal.Title>Confirmation</Modal.Title>
         </Modal.Header>
         <Modal.Body>Are you sure you want to clean this board?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button variant="secondary" onClick={handleCloseCleanBoardModal}>
             Cancel
           </Button>
           <Button variant="danger" onClick={cleanBoard}>
