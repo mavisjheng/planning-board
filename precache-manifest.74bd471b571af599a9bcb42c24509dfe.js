@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5bad26c5a684bf6b99ef689f89bc48a7",
+    "revision": "ff969052b46f183e65c8f8d36b56ccfd",
     "url": "/planning-board/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/planning-board/static/css/2.a3aef58e.chunk.css"
   },
   {
-    "revision": "60ac51a8e0c97b202ecd",
+    "revision": "4e4a948aa8e25b37ea21",
     "url": "/planning-board/static/css/main.fd98461b.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/planning-board/static/js/2.a66cfd6c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "60ac51a8e0c97b202ecd",
-    "url": "/planning-board/static/js/main.c9f17b31.chunk.js"
+    "revision": "4e4a948aa8e25b37ea21",
+    "url": "/planning-board/static/js/main.cf30bec0.chunk.js"
   },
   {
     "revision": "576707fb8d7a7efaf020",
