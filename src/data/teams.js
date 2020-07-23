@@ -5,6 +5,7 @@ const teamData = {
     "Clover",
     "Crystal",
     "Jade",
+    "LKP",
     "Martian",
     "Raccoon Squat",
     "Sapphire",
@@ -44,6 +45,11 @@ const teamData = {
     "ChienYu",
     "YingYu",
     "YuHsuan"
+  ],
+  LKP: [
+    "Edgar",
+    "Jiun-Hao",
+    "Neil"
   ],
   Martian: ["Alan", "Andrew", "Colby"],
   "Raccoon Squat": [
